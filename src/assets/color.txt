@@ -1,0 +1,238 @@
+button :   #361db7
+
+
+
+
+
+import { useState, useEffect } from "react";
+import '../../assets/CSS/seatBooking.css'
+// import { confirmAlert } from 'react-confirm-alert'; // Import
+// import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
+
+import { useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types'; // 
+import { fetchAllSeats } from "../../servicesBooking/services/SeatServies";
+import { getToken } from "../../servicesBooking/services/UserServies";
+
+
+
+
+function SeatBooking() {
+  const [seat, setSeat] = useState([]);
+  const [seatAvailable, setSeatAvailable] = useState([]);
+  const [seatReserved, setSeatReserved] = useState([]);
+  const [seatSelected, setSeatSelected] = useState([]);
+
+  useEffect(() => {
+    getAllSeats();
+  }, []);
+  const getAllSeats = async () => {
+    try {
+      const res = await fetchAllSeats();
+      const seatData = res.data;
+      setSeat(seatData.map((item) => item.seatno));
+      setSeatAvailable(
+        seatData.filter((item) => !item.booked).map((item) => item.seatno)
+      );
+      setSeatSelected(
+        seatData.filter((item) => item.booked).map((item) => item.seatno)
+      );
+      setSeatReserved([]); // Or initialize with seats already selected by the user
+    } catch (error) {
+      console.error("Error fetching seat data:", error);
+    }
+  };
+
+  const onClickData = (seat) => {
+    if (seatReserved.includes(seat)) {
+      setSeatAvailable([...seatAvailable, seat]);
+      setSeatReserved(seatReserved.filter((res) => res !== seat));
+    } else {
+      setSeatReserved([...seatReserved, seat]);
+      setSeatAvailable(seatAvailable.filter((res) => res !== seat));
+    }
+  };
+
+  const checktrue = (row) => {
+    return !seatSelected.includes(row);
+  };
+  const navigate = useNavigate();
+  const handleSubmited = () => {
+    if (getToken()) {
+      if (setSeatReserved.length > 0) {
+        // confirmAlert({
+        //     title: 'Confirm to submit',
+        //     message: 'Are you sure you want to save this thing into the database?',
+        //     buttons: [
+        //       {
+        //         label: 'Yes',
+        //         onClick: () => {
+        //           // Save it!
+        //           //console.log('Thing was saved to the database.');
+        //           setSeatSelected([...seatSelected, ...seatReserved]);
+        //           console.log(seatReserved.length);
+        //           seatReserved.forEach(s => {
+        //             // console.log('seat', s);
+        //             bookingSeat(s);
+        //           });
+        //           setSeatReserved([]);
+        //         }
+        //       },
+        //       {
+        //         label: 'No',
+        //         onClick: () => {
+        //           // Do nothing!
+        //           console.log('Thing was not saved to the database.');
+        //         }
+        //       }
+        //     ]
+        //   });
+
+      }
+
+      //   setSeatSelected([...seatSelected, ...seatReserved]);
+      //   console.log(seatReserved.length);
+      //   seatReserved.forEach(s => {
+      //     console.log('seat',s);
+      //   });
+      setSeatReserved([]);
+    } else {
+      alert("you need to login,we are sending you to login page");
+      setTimeout(() => {
+        navigate("/login");
+      }, 3000);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Library Seat System</h1>
+      <SeatSummary
+        totalSeats={seat.length}
+        availableSeats={seatAvailable.length}
+        reservedSeats={seatReserved.length}
+      />
+      <DrawGrid
+        seat={seat}
+        available={seatAvailable}
+        reserved={seatReserved}
+        selected={seatSelected}
+        onClickData={onClickData}
+        checktrue={checktrue}
+        handleSubmited={handleSubmited}
+      />
+      <AvailableSeats available={seatAvailable} />
+    </div>
+  );
+}
+
+
+
+
+
+
+function DrawGrid({
+  seat,
+  reserved,
+  selected,
+  onClickData,
+  checktrue,
+  handleSubmited,
+}) {
+  const onClickSeat = (seat) => {
+    onClickData(seat);
+  };
+
+  return (
+    <div className="container1">
+      <table className="grid1">
+        <tbody>
+          <tr>
+            {seat.map((row, index) => (
+              <td
+                key={index}
+                className={
+                  selected.includes(row)
+                    ? "reserved"
+                    : reserved.includes(row)
+                      ? "selected"
+                      : "available"
+                }
+                onClick={checktrue(row) ? () => onClickSeat(row) : null}
+              >
+                {row}
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+      <button
+        type="button"
+        className="btn-success btnmargin"
+        onClick={handleSubmited}
+      >
+        Confirm Booking
+      </button>
+    </div>
+  );
+}
+
+
+
+DrawGrid.propTypes = {
+  seat: PropTypes.arrayOf(PropTypes.number).isRequired,
+  available: PropTypes.arrayOf(PropTypes.number).isRequired,
+  reserved: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selected: PropTypes.arrayOf(PropTypes.number).isRequired,
+  onClickData: PropTypes.func.isRequired,
+  checktrue: PropTypes.func.isRequired,
+  handleSubmited: PropTypes.func.isRequired,
+};
+
+function AvailableSeats({ available }) {
+  return (
+    <div className="available-seats">
+      <h2>Available Seats</h2>
+      <ul>
+        {available.map((seat) => (
+          <li key={seat}>{seat}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+AvailableSeats.propTypes = {
+  available: PropTypes.arrayOf(PropTypes.number).isRequired,
+};
+
+
+
+function SeatSummary({ totalSeats, availableSeats, reservedSeats }) {
+  return (
+    <div className="seat-summary">
+      <div className="summary-box">
+        <h3>Total Seats</h3>
+        <p>{totalSeats}</p>
+      </div>
+      <div className="summary-box">
+        <h3>Available Seats</h3>
+        <p>{availableSeats}</p>
+      </div>
+      <div className="summary-box">
+        <h3>Reserved Seats</h3>
+        <p>{reservedSeats}</p>
+      </div>
+    </div>
+  );
+}
+
+SeatSummary.propTypes = {
+  totalSeats: PropTypes.number.isRequired,
+  availableSeats: PropTypes.number.isRequired,
+  reservedSeats: PropTypes.number.isRequired,
+};
+
+
+export default SeatBooking;

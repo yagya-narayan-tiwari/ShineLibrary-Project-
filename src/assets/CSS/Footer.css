@@ -1,0 +1,98 @@
+
+*{
+    font-family: sans-serif;
+}
+
+.add{
+    font-size: 13px;
+    margin-top: 20px;
+}
+.desc{
+    font-size: 16px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+#logo1{
+    font-weight: 600;
+    font-size: 30px;
+}
+#logo1 span{
+    font-weight:500;
+    font-size: 18px;
+}
+
+.icons{
+    font-size: 50px;
+}
+#home1{
+font-size: 15px;
+opacity: 0.7;
+}
+#about1{
+font-size: 15px;
+opacity: 0.7;
+}
+#ser1{
+font-size: 15px;
+opacity: 0.7;
+}
+#blog1{
+font-size: 15px;
+opacity: 0.7;
+}
+#contact1{
+font-size: 15px;
+opacity: 0.7;
+}
+
+#home1:hover , #about1:hover , #ser1:hover , #blog1:hover , #contact1:hover{
+    opacity: 1;
+}
+.aboutIcon h6{
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+.socialIcon h6{
+    font-size: 17px;
+    @media (max-width:900px){
+        margin-left: 50px;
+    }
+}
+
+#icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 22px;
+    cursor: pointer;
+    @media (max-width:900px){
+        margin-left: 50px;
+    }
+}
+#icons .icn{
+    opacity: 0.7;
+}
+#icons .icn:hover{
+    opacity: 1;
+}
+
+.rowWidth{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.rowWidth p{
+    color: white;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+
+.footerBox2{
+    justify-content: space-between;
+    align-items: flex-start;
+    @media (max-width:1000px) {
+    margin-inline: auto;
+    }
+}

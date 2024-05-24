@@ -1,0 +1,49 @@
+*{
+    font-family: sans-serif;
+
+}
+:root{
+    --bgcolor : #361db7;
+}
+#signUpContainer{
+    width: 80%;
+    height: auto;
+    margin-inline:  auto;
+}
+
+
+.loginHeading{
+    margin-bottom: 10px;
+   
+}
+
+#signUpBtn{
+    background-color: var(--bgcolor);
+    padding: 8px 15px;
+    width: 100%;
+    margin-inline: auto;
+}
+#signUpBtn:hover{
+    background-color: rgb(68, 68, 245)
+   
+}
+#loginForm{
+    width: 70%;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.formLabel{
+    font-size: 15px;
+   font-weight: 500;
+   margin-top: 5px;
+}
+#logintxt{
+    color: var(--bgcolor);
+   
+    font-weight: 600;
+    margin-top: 10px;
+}

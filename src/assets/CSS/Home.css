@@ -1,0 +1,57 @@
+*{
+    font-family: sans-serif;
+
+}
+:root{
+  --highter_color : #361db7;
+  --hover_color : #5034dd;
+}
+
+#leftHomeCol{
+ display: flex;
+ justify-content: center;
+ align-self: center;
+ flex-direction: column;
+ gap: 15px;
+}
+#leftHomeCol h1{
+font-size: 40px;
+font-weight: 600;
+}
+#leftHomeCol h1 span{
+color:var(--highter_color) ;
+}
+#leftHomeCol h5{
+font-weight: 600;
+opacity: 0.8;
+font-size: 20px;
+}
+#leftHomeCol p{
+  color: rgb(102, 102, 102);
+}
+
+#reviews .review{
+  border: 2px solid var(--highter_color);
+  border-radius: 10px;
+  margin-inline: 20px;
+
+}
+
+#reviews{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ @media (max-width:1000px) {
+  width: 80%;
+  margin-inline: auto;
+
+  gap: 15px;
+ }
+}
+#reviews p{
+color: rgb(85, 85, 85);
+}
+#reviews h6{
+font-size: 13px;
+font-weight: 600;
+}

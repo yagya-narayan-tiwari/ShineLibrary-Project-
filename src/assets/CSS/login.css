@@ -1,0 +1,67 @@
+*{
+    font-family: sans-serif;
+
+}
+:root{
+    --bgcolor : #361db7;
+}
+#loginContainer{
+    width: 70%;
+    height: auto;
+    margin-inline:  auto;
+}
+
+
+.loginHeading{
+    margin-bottom: 30px;
+   
+}
+
+#loginBtn{
+    background-color: var(--bgcolor);
+    padding: 8px 15px;
+    width: 100%;
+    margin-inline: auto;
+}
+#loginBtn:hover{
+    background-color: rgb(68, 68, 245)
+   
+}
+#loginForm{
+    width: 70%;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.formLabel{
+    font-size: 15px;
+   font-weight: 500;
+   margin-top: 5px;
+}
+#logintxt{
+    color: var(--bgcolor);
+   
+    font-weight: 600;
+    margin-top: 10px;
+}
+#forgotPassword{
+    text-decoration: none;
+    color: var(--bgcolor);
+    font-size: 14px;
+    cursor: pointer;
+}
+#forgotPassword:hover{
+    opacity: 0.8;
+}
+.signUp{
+   color: var(--bgcolor);
+   text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+.signUp:hover{
+  opacity: 0.8;
+}

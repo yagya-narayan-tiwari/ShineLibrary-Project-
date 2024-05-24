@@ -1,0 +1,92 @@
+:root{
+    --highter_color : #361db7;
+    --hover_color : #5034dd;
+}
+
+
+.btn{
+    margin-inline: 15px;
+
+}
+
+
+#login{
+    background-color: transparent;
+    color: black;
+    border: 2px solid  var(--highter_color) ;
+    padding: 5px 15px;
+    transition: all 0.3s ease-in-out;
+
+    @media (max-width:1000px) {
+        margin-block: 20px;
+        width: 40%;
+        margin-inline: auto;
+    }
+
+
+}
+#login:hover{
+    background-color: var(--highter_color);
+    color: white;
+
+
+
+}
+#Bookbtn{
+    padding: 5px 15px;
+    background-color: var(--highter_color);
+    @media (max-width:1000px) {
+        width: 40%;
+        margin-inline: auto;
+    }
+}
+#Bookbtn:hover{
+    padding: 5px 15px;
+    background-color: var(--hover_color);
+}
+
+#navIcon{
+    margin-left: auto;
+    font-family: sans-serif;
+    font-weight: 500;
+    gap: 30px;
+    @media (max-width:1000px) {
+       gap: 5px;
+    }
+}
+#home{
+    font-weight: 500;
+}
+#home:hover , #about:hover , #ser:hover , #blog:hover , #contact:hover{
+    color: var(--highter_color);
+}
+
+#logo{
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+}
+#logo span{
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--highter_color);
+}
+
+#navrightIcons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashBoard{
+    font-size: 35px;
+    color: var(--highter_color);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    
+}
+.dashBoard:hover{
+   color: var(--hover_color);
+
+}
